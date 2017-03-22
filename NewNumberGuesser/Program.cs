@@ -16,10 +16,32 @@ namespace NewNumberGuesser
             var guess = 0;
             int.TryParse(input, out guess);
             return guess;
-        }    
+        }
 
-            static void Main(string[] args)
+        //method #2
+        static void EndGame(int attempt)
+        {
+            if (attempt > 4)
             {
+                Console.WriteLine("You lost.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("You Won!");
+                Console.ReadLine();
+            }
+
+        }
+
+        //method #3
+        //static void EndGame(int attempt)
+        //{
+        //
+        //}
+
+        static void Main(string[] args)
+        {
 
             var target = new Random().Next(1, 101);
             Console.WriteLine($"The target is {target}.");
@@ -30,7 +52,7 @@ namespace NewNumberGuesser
             while (counter < 5 && guess != target)
             {
                 //method #1
-                var input = GetUserGuess("Pick a number: ");
+                var question = GetUserGuess("Pick a number: ");
 
                 var wasAlreadyGuess = false;
                 foreach (var userGuess in pastGuess)
@@ -71,17 +93,9 @@ namespace NewNumberGuesser
                 }
                 counter++;
             }
+            //method #2
+            EndGame(counter);
 
-            if (counter > 4)
-            {
-                Console.WriteLine("You lost.");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("You Won!");
-                Console.ReadLine();
-            }
 
         }
     }
