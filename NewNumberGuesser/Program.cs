@@ -8,20 +8,29 @@ namespace NewNumberGuesser
 {
     class Program
     {
-        static void Main(string[] args)
+        //method #1
+        static int GetUserGuess(string message)
         {
+            Console.WriteLine(message);
+            var input = Console.ReadLine();
+            var guess = 0;
+            int.TryParse(input, out guess);
+            return guess;
+        }    
+
+            static void Main(string[] args)
+            {
 
             var target = new Random().Next(1, 101);
-            Console.WriteLine($"the target is {target}");
+            Console.WriteLine($"The target is {target}.");
 
             var counter = 0;
             var guess = 0;
             var pastGuess = new int[5];
             while (counter < 5 && guess != target)
             {
-                Console.WriteLine("Give me your best guess");
-                var input = Console.ReadLine();
-                int.TryParse(input, out guess);
+                //method #1
+                var input = GetUserGuess("Pick a number: ");
 
                 var wasAlreadyGuess = false;
                 foreach (var userGuess in pastGuess)
@@ -34,13 +43,13 @@ namespace NewNumberGuesser
 
                 if (wasAlreadyGuess)
                 {
-                    Console.WriteLine("You aalready guesses that, foool");
+                    Console.WriteLine("You already guessed that. Try again.");
                 }
                 else
                 {
                     pastGuess[counter] = guess;
 
-                    Console.WriteLine($"your guess was {guess}");
+                    Console.WriteLine($"Your guess was {guess}.");
 
                     if (guess < target)
                     {
@@ -65,11 +74,13 @@ namespace NewNumberGuesser
 
             if (counter > 4)
             {
-                Console.WriteLine("You lost :-(");
+                Console.WriteLine("You lost.");
+                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("You Won!");
+                Console.ReadLine();
             }
 
         }
